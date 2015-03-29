@@ -12,11 +12,11 @@ body {
 	}
 
 	#logo{
-		  width: 75px;
-  display: block;
-  margin-top: 90px;
-  margin-left: auto;
-  margin-right: auto;
+		  width: 100px;
+		  display: block;
+		  margin-top: 90px;
+		  margin-left: auto;
+		  margin-right: auto;
 	}
 
 	a {
@@ -31,4 +31,17 @@ body {
 	}
 	#b {
 		color: #ff0096;
+	}
+
+	#command{
+		background: none;
+  		border: none; 
+  		font-family: courier, monospace;
+		color: #fff;
+  		outline: none;
+  		width: 65%;
+	}
+
+	#command:focus{
+		outline: none;
 	}
