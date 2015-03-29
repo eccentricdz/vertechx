@@ -95,6 +95,25 @@ function t() {
 var timer = setInterval("t();", 30);
 
 $(document).ready(function() {
+
+	var beep = document.getElementById('beep');
+
+	function alertify(msg){
+		beep.play();
+		Typer.write('<p class="alert">'+msg+'</p>');
+		
+	}
+
+	function processCommand(cmd){
+		cmd = cmd.split(' ');
+
+		console.log(cmd);
+		alertify("\'"+cmd+"' is not recognized as an internal or external command, stay tuned, we will update the list of valid commands");
+	}
+
+$(document).click(function(){
+	$('#command').focus();
+});
 	
 $('#console').keypress(function(event) {
 		console.log(event.which);
@@ -102,6 +121,7 @@ $('#console').keypress(function(event) {
 			event.preventDefault();
 			Typer.write('<p><span id="a">'+Typer.name+'</span>:<span id="b">~</span><span id="c">$</span>&nbsp;'+$('#command').val()+'</p>');
 			var command = $('#command').val();
+			processCommand(command);
 			$('#command').val('');
 		}
 	});
