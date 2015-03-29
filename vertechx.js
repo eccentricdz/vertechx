@@ -77,7 +77,7 @@ function replaceUrls(text) {
 }
 }
 
-Typer.speed=10;
+Typer.speed=3;
 Typer.file="vertechx.txt";
 Typer.init();
  
