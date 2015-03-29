@@ -1,15 +1,15 @@
 var Typer={
-	text: ". . . . .",
+	text: '<span id="a">vertechx</span>:<span id="b">~</span><span id="c">$</span> Vertechx 2015<br/><br/>Welcome to VertechX 2015<!-- laglaglaglaglaglaglaglaglaglaglaglag --><p>The annual technology festival of <a href="www.bitmesra.ac.in" target="_blank">Birla Institute of Technology, Mesra</a><br/><br/></p><!-- qowifjqwoeiijefoqwijefoijfqiwoefjj --><p>Follow us on our <a href="https://www.facebook.com/vertechxbitmesra" target="_blank">facebook</a> page<br/><br/></p><!- oqwipjefqwioefjwioqfjoiqwjfeioqwjefoi --><p>The details are coming very soon. Stay tuned for updates.<br/><br/></p><!-- owlsqweoifjqwoefijqwoeifjqwoefijwef -->If you would like to get in touch with us<!-- slightdelayhere-->, mail us at : <a href="mailto:vertechx.bitmesra@gmail.com">vertechx.bitmesra@gmail.com</a><p>Have a good day :)</p>',
 	index:0, 
 	speed:2, 
 	file:"", 
 	init: function(){
 		accessCountimer=setInterval(function(){Typer.updLstChr();},500);
-		$.get(Typer.file,function(data){
-			Typer.text=data;
-			Typer.text = Typer.text.slice(0, Typer.text.length-1);
-			//console.log(Typer.text);
-		});
+		// $.get(Typer.file,function(data){
+		// 	Typer.text=data;
+		// 	Typer.text = Typer.text.slice(0, Typer.text.length-1);
+		// 	//console.log(Typer.text);
+		// });
 	},
  
 	content:function(){
