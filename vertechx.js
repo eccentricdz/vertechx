@@ -209,7 +209,7 @@ $(document).ready(function() {
 				excecute[cmd](cmd.split(1));
 		}
 		else
-		alertify("\'"+cmd+"' is not recognized as an internal or external command, stay tuned, we will update the list of valid commands", false);
+		alertify("\'"+cmd[0]+"' is not recognized as an internal or external command, stay tuned, we will update the list of valid commands", false);
 	}
 
 $(document).click(function(){
