@@ -29,7 +29,7 @@ var contacts = [
 {
 	name : 'Swapnil Jha',
 	mobile : '9572227745',
-	email : ''
+	email : 'swapnil1270.11@bitmesra.ac .in'
 },
 {
 	name : 'Harsh Vardhan',
@@ -155,7 +155,7 @@ Typer.file="vertechx.txt";
 Typer.text+='If you would like to get in touch with us<!-- slightdelayhere-->, mail us at : <a href="mailto:vertechx.bitmesra@gmail.com">vertechx.bitmesra@gmail.com</a>';
 Typer.text+="<br />or type <span id='a'>'contact'</span> to get the contact details";
 Typer.text+="<br /><br />Type <span id='a'>'register'</span> to register your team now"
-Typer.text+="<br />Type <span id='a'>'login'</span> to log in with your team account"
+Typer.text+="<br />Type <span id='a'>'login'</span> to log in to your team account"
 
 Typer.init();
  
