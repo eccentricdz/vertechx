@@ -90,7 +90,7 @@ body {
 		color: rgb(90, 239, 39);
 	}
 
-	#command{
+	#command, .response{
 		background: none;
   		border: none; 
   		font-family: courier, monospace;
@@ -99,7 +99,7 @@ body {
   		width: 65%;
 	}
 
-	#command:focus{
+	#command:focus, .response:focus{
 		outline: none;
 	}
 

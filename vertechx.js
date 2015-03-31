@@ -1,3 +1,5 @@
+
+
 var contacts = [
 {
 	name : 'Jay Megotia',
@@ -39,7 +41,7 @@ var contacts = [
 
 var Typer={
 	name : 'vertechx',
-	text: '<span id="a">vertechx</span>:<span id="b">~</span><span id="c">$</span> Vertechx 2015<br/><br/>Welcome to Vertechx 2015<!-- laglaglaglaglaglaglag--><p>The annual technology festival of <a href="www.bitmesra.ac.in" target="_blank">Birla Institute of Technology, Mesra</a><br/><br/></p><!-- qowifjqwoeiijefoqwioefjj --><p>Follow us on our <a href="https://www.facebook.com/vertechxbitmesra" target="_blank">facebook</a> page<br/><br/></p><!- oqwipjefqwioefjwioqwji --><p>The event details are coming very soon. Stay tuned for updates.<br/></p>',
+	text: '<span id="a">vertechx</span>:<span id="b">~</span><span id="c">$</span> Vertechx 2015<br/><br/>Welcome to Vertechx 2015<!-- laglaglaglaglaglaglag--><p>The annual technology festival of <a href="www.bitmesra.ac.in" target="_blank">Birla Institute of Technology, Mesra</a>, to be held this year on the <span id="a">11th and 12th of April</span><br/><br/></p><!-- qowifjqwoeiijefoqwioefjj --><p>Follow us on our <a href="https://www.facebook.com/vertechxbitmesra" target="_blank">facebook</a> page<br/><br/></p><!- oqwipjefqwioefjwioqwji --><p>The event details are coming very soon. Stay tuned for updates.<br/></p>',
 	index:0, 
 	speed:2, 
 	file:"", 
@@ -58,7 +60,10 @@ var Typer={
 	},
  
 	write:function(str){
+		if(document.getElementById('prompt')!=null)
 		$('#prompt').before(str);
+		else
+			$('#console').append(str);
 		window.scrollBy(0,50);
 		return false;
 	},
@@ -103,6 +108,14 @@ var Typer={
 	}
 }
 
+function askUser(ques, name){
+	if(name=="password")
+		Typer.write('<p><span id="c">'+ques+'</span>&nbsp;<input type="password" autofocus class="response" id='+name+' name="response"></input></p>');
+	else
+	Typer.write('<p><span id="c">'+ques+'</span>&nbsp;<input type="text" autofocus class="response" id='+name+' name="response"></input></p>');
+	$('.response').focus();
+};
+
 
 var excecute = {
 	contact : function(){
@@ -116,6 +129,11 @@ var excecute = {
 					'register.html',
 					'_blank' // <- This is what makes it open in a new window.
 					);
+	},
+	login : function(){
+		$('#prompt').remove();
+		askUser("Enter your team name : ", 'team');
+
 	}
 }
 
@@ -131,12 +149,14 @@ function replaceUrls(text) {
 }
 }
 
-Typer.speed=5;
+Typer.speed=8;
 Typer.file="vertechx.txt";
 
 Typer.text+='If you would like to get in touch with us<!-- slightdelayhere-->, mail us at : <a href="mailto:vertechx.bitmesra@gmail.com">vertechx.bitmesra@gmail.com</a>';
 Typer.text+="<br />or type <span id='a'>'contact'</span> to get the contact details";
 Typer.text+="<br /><br />Type <span id='a'>'register'</span> to register your team now"
+Typer.text+="<br />Type <span id='a'>'login'</span> to log in with your team account"
+
 Typer.init();
  
 
@@ -151,6 +171,18 @@ function t() {
 }
 
 var timer = setInterval("t();", 30);
+
+var userResponse = {
+	
+}
+
+function authenticate(team, password){
+	//return true or false by matching the team and password in the db
+	if(team==password)
+	return true;
+	else
+		return false;
+}
 
 $(document).ready(function() {
 
@@ -181,17 +213,42 @@ $(document).ready(function() {
 	}
 
 $(document).click(function(){
-	$('#command').focus();
+	$('#command, .response').focus();
 });
 	
 $('#console').keypress(function(event) {
-		console.log(event.which);
+		console.log(event.target);
 		if(event.which==13){
 			event.preventDefault();
+			var target = $(event.target);
+			if(target.attr('id')=="command"){
 			Typer.write('<p><span id="a">'+Typer.name+'</span>:<span id="b">~</span><span id="c">$</span>&nbsp;'+$('#command').val()+'</p>');
 			var command = $('#command').val();
 			processCommand(command);
 			$('#command').val('');
+								}
+			else{
+				var name = target.attr('id');
+				userResponse[name] = target.val();
+				Typer.write('<span>'+target.val()+'</span>');
+				target.remove();
+				if(name=="team")
+					askUser("Enter your password : ", 'password');
+				else if(name=="password")
+				{
+					var auth = authenticate(userResponse['team'], userResponse['password']);
+					if(auth)
+					{
+						alertify("Welcome "+userResponse['team']+'!', true);
+						Typer.name = userResponse['team'];
+					}
+					else
+					{
+						alertify("Error logging in! Please check your username/password and try again", false);
+					}
+					Typer.addPrompt();
+				}
+			}
 		}
 	});
 
