@@ -1,7 +1,7 @@
 var contacts = [
 {
 	name : 'Jay Megotia',
-	mobile : '8609491889',
+	mobile : '7677153992',
 	email : 'jaykumarmegotia@gmail.com'
 },
 {
@@ -35,6 +35,8 @@ var contacts = [
 	email : 'harsh.vardhan1071@gmail.com'
 }
 ];
+
+
 var Typer={
 	name : 'vertechx',
 	text: '<span id="a">vertechx</span>:<span id="b">~</span><span id="c">$</span> Vertechx 2015<br/><br/>Welcome to Vertechx 2015<!-- laglaglaglaglaglaglag--><p>The annual technology festival of <a href="www.bitmesra.ac.in" target="_blank">Birla Institute of Technology, Mesra</a><br/><br/></p><!-- qowifjqwoeiijefoqwioefjj --><p>Follow us on our <a href="https://www.facebook.com/vertechxbitmesra" target="_blank">facebook</a> page<br/><br/></p><!- oqwipjefqwioefjwioqwji --><p>The event details are coming very soon. Stay tuned for updates.<br/></p>',
@@ -101,6 +103,22 @@ var Typer={
 	}
 }
 
+
+var excecute = {
+	contact : function(){
+			for(var i=0;i<contacts.length;i++)
+			{
+				Typer.write('<p class="contacts">'+contacts[i].name+' : '+contacts[i].mobile+' / <a href="mailto:'+contacts[i].email+'">'+contacts[i].email+'</a></p>')
+			}
+	},
+	register : function(){
+			window.open(
+					'register.html',
+					'_blank' // <- This is what makes it open in a new window.
+					);
+	}
+}
+
 	
 function replaceUrls(text) {
 	var http = text.indexOf("http://");
@@ -138,13 +156,6 @@ $(document).ready(function() {
 
 	var beep = document.getElementById('beep');
 
-	function printContact(){
-		for(var i=0;i<contacts.length;i++)
-			{
-				Typer.write('<p class="contacts">'+contacts[i].name+' : '+contacts[i].mobile+' / <a href="mailto:'+contacts[i].email+'">'+contacts[i].email+'</a></p>')
-			}
-	}
-
 	function alertify(msg, success){
 		if(!success)
 		{
@@ -158,16 +169,12 @@ $(document).ready(function() {
 	function processCommand(cmd){
 		cmd = cmd.split(' ');
 
-		if(cmd[0]=='contact')
+		if(excecute.hasOwnProperty(cmd[0]))
 		{
-			printContact();
-		}
-		else if(cmd[0]=='register')
-		{
-			window.open(
-					'register.html',
-					'_blank' // <- This is what makes it open in a new window.
-					);
+			if(cmd.length==1)
+				excecute[cmd]();
+			else
+				excecute[cmd](cmd.split(1));
 		}
 		else
 		alertify("\'"+cmd+"' is not recognized as an internal or external command, stay tuned, we will update the list of valid commands", false);
