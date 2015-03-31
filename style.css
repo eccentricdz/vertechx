@@ -61,6 +61,12 @@ body {
 	#submit:hover{
 		color: #fc5130;		border-color: #fc5130;
 	}
+    .notif.error {
+        color: red;
+    }
+    .notif.success {
+        color: green;
+    }
 
 	#logo{
 		  width: 120px;

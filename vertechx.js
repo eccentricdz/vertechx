@@ -107,7 +107,12 @@ var Typer={
 		$('#console').append(prompt);
 	}
 }
-
+$.getJSON('api/login.php', function(data){
+    if(data['logged_in']){
+        Typer.name = data['userinfo']['teamName'];
+        alertify("Welcome Team "+Typer.name+'!', true);
+    }
+});
 function askUser(ques, name){
 	if(name=="password")
 		Typer.write('<p><span id="c">'+ques+'</span>&nbsp;<input type="password" autofocus class="response" id='+name+' name="response"></input></p>');
@@ -134,7 +139,7 @@ var excecute = {
 		$('#prompt').remove();
 		askUser("Enter your team name : ", 'team');
 
-	}
+	},
 }
 
 	
@@ -148,6 +153,25 @@ function replaceUrls(text) {
 	return text
 }
 }
+
+function authenticate(team, password, cb){
+	//return true or false by matching the team and password in the db
+    $.ajax({
+        url: 'api/login.php',
+        type: 'POST',
+        data: $.param( {'user':team, 'pass': password } ),
+        success: function (data, textStatus, jqXHR) {
+            data = JSON.parse(data);
+            if(data['ok'])cb['success']();
+            else cb['error']('Error logging in! Please check your username/password and try again');
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            // error callback
+            cb['error']('Unknown Error!');
+        }
+    });
+}
+
 
 Typer.speed=8;
 Typer.file="vertechx.txt";
@@ -174,14 +198,6 @@ var timer = setInterval("t();", 30);
 
 var userResponse = {
 	
-}
-
-function authenticate(team, password){
-	//return true or false by matching the team and password in the db
-	if(team==password)
-	return true;
-	else
-		return false;
 }
 
 $(document).ready(function() {
@@ -237,20 +253,20 @@ $('#console').keypress(function(event) {
 					askUser("Enter your password : ", 'password');
 				else if(name=="password")
 				{
-					var auth = authenticate(userResponse['team'], userResponse['password']);
-					if(auth)
-					{
-						alertify("Welcome Team "+userResponse['team']+'!', true);
-						Typer.name = userResponse['team'];
-					}
-					else
-					{
-						alertify("Error logging in! Please check your username/password and try again", false);
-					}
-					Typer.addPrompt();
-				}
-			}
-		}
-	});
+                    authenticate(userResponse['team'], userResponse['password'], {
+                        success: function(){
+                            alertify("Welcome Team "+userResponse['team']+'!', true);
+                            Typer.name = userResponse['team'];
+                            Typer.addPrompt();
+                        },
+                        error: function(msg){
+                            alertify(msg, false);
+                            Typer.addPrompt();
+                        }
+                    });
+                }
+            }
+        }
+});
 
 });
