@@ -240,7 +240,7 @@ $('#console').keypress(function(event) {
 					var auth = authenticate(userResponse['team'], userResponse['password']);
 					if(auth)
 					{
-						alertify("Welcome "+userResponse['team']+'!', true);
+						alertify("Welcome Team "+userResponse['team']+'!', true);
 						Typer.name = userResponse['team'];
 					}
 					else
