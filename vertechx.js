@@ -140,6 +140,14 @@ var excecute = {
 		askUser("Enter your team name : ", 'team');
 
 	},
+
+	list : function(args){
+		
+		//if correct sequence args[0]
+		alertify('Bravo! We will announce the prizes by the end of the day.', true);
+		//may be store the no of entries kai, pata chalega kitna successful tha
+		//else part here
+	}
 }
 
 	
@@ -180,6 +188,7 @@ Typer.text+='If you would like to get in touch with us<!-- slightdelayhere-->, m
 Typer.text+="<br />or type <span id='a'>'contact'</span> to get the contact details";
 Typer.text+="<br /><br />Type <span id='a'>'register'</span> to register your team now"
 Typer.text+="<br />Type <span id='a'>'login'</span> to log in to your team account"
+Typer.text+="<br /><br />To submit your answer for 'linked list' , type <span id='a'>'list [your-answer] [roll-no]'</span>, for ex., list andpq be/1087/2011"
 
 Typer.init();
  
@@ -194,16 +203,6 @@ function t() {
 	}
 }
 
-var timer = setInterval("t();", 30);
-
-var userResponse = {
-	
-}
-
-$(document).ready(function() {
-
-	var beep = document.getElementById('beep');
-
 	function alertify(msg, success){
 		if(!success)
 		{
@@ -214,15 +213,27 @@ $(document).ready(function() {
 			Typer.write('<p class="success">'+msg+'</p>');
 	}
 
+var timer = setInterval("t();", 30);
+
+var userResponse = {
+	
+}
+
+$(document).ready(function() {
+
+	var beep = document.getElementById('beep');
+
+
+
 	function processCommand(cmd){
 		cmd = cmd.split(' ');
-
+		console.log(cmd);
 		if(excecute.hasOwnProperty(cmd[0]))
 		{
 			if(cmd.length==1)
-				excecute[cmd]();
+				excecute[cmd[0]]();
 			else
-				excecute[cmd](cmd.split(1));
+				excecute[cmd[0]](cmd.slice(1));
 		}
 		else
 		alertify("\'"+cmd[0]+"' is not recognized as an internal or external command, stay tuned, we will update the list of valid commands", false);
@@ -233,7 +244,7 @@ $(document).click(function(){
 });
 	
 $('#console').keypress(function(event) {
-		console.log(event.target);
+		//console.log(event.target);
 		if(event.which==13){
 			event.preventDefault();
 			var target = $(event.target);
