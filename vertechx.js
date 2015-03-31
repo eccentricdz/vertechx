@@ -107,7 +107,12 @@ var Typer={
 		$('#console').append(prompt);
 	}
 }
-
+$.getJSON('api/login.php', function(data){
+    if(data['logged_in']){
+        Typer.name = data['userinfo']['teamName'];
+        alertify("Welcome Team "+Typer.name+'!', true);
+    }
+});
 function askUser(ques, name){
 	if(name=="password")
 		Typer.write('<p><span id="c">'+ques+'</span>&nbsp;<input type="password" autofocus class="response" id='+name+' name="response"></input></p>');
@@ -134,7 +139,7 @@ var excecute = {
 		$('#prompt').remove();
 		askUser("Enter your team name : ", 'team');
 
-	}
+	},
 }
 
 	
