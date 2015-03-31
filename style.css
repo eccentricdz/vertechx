@@ -13,6 +13,55 @@ body {
 		min-height: 250px;
 	}
 
+	#registration{
+		color: #0bc;
+		width:750px;
+		margin-left:auto;
+		margin-right:auto;
+		margin-top:50px;
+		font-size:14px;
+	}
+
+	input.reg
+	{
+		color: #0bc;
+		font-family: courier, monospace;
+		background: none;
+		border: 1px solid #0bc;
+		width: 100%;
+		padding: 9px;
+		margin: 10px auto;
+	}
+
+	.reg:focus{
+		outline : none;
+		border-color: #fc5130;
+	}
+
+	h1{
+		color: #0bc;
+		font-size: 1.4em;
+		text-align: center;
+		margin-top: 40px;
+	}
+
+	#submit{
+		font-family: courier, monospace;
+		background: none;
+  outline: none;
+  border: 1px solid #0bc;
+  color: #0bc;
+  padding: 10px 75px;
+  width: 200px;
+  display: block;
+  margin: 0 auto;
+  cursor: pointer;
+	}
+
+	#submit:hover{
+		color: #fc5130;		border-color: #fc5130;
+	}
+
 	#logo{
 		  width: 120px;
 		  display: block;
@@ -37,6 +86,9 @@ body {
 	.alert{
 		color: red;
 	}
+	.success{
+		color: rgb(90, 239, 39);
+	}
 
 	#command{
 		background: none;
@@ -58,3 +110,19 @@ body {
 	#logo-footer{
 		width: 155px;
 	}
+
+	::-webkit-input-placeholder {
+   color: 0bc;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: 0bc;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: 0bc;  
+}
+
+:-ms-input-placeholder {  
+   color: 0bc;  
+}
