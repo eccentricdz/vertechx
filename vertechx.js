@@ -230,6 +230,7 @@ $('#console').keypress(function(event) {
 			else{
 				var name = target.attr('id');
 				userResponse[name] = target.val();
+				if(name!='password')
 				Typer.write('<span>'+target.val()+'</span>');
 				target.remove();
 				if(name=="team")
