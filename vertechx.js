@@ -113,7 +113,7 @@ function replaceUrls(text) {
 }
 }
 
-Typer.speed=15;
+Typer.speed=5;
 Typer.file="vertechx.txt";
 
 Typer.text+='If you would like to get in touch with us<!-- slightdelayhere-->, mail us at : <a href="mailto:vertechx.bitmesra@gmail.com">vertechx.bitmesra@gmail.com</a>';
@@ -162,15 +162,13 @@ $(document).ready(function() {
 		{
 			printContact();
 		}
-
-		if(cmd[0]=='register')
+		else if(cmd[0]=='register')
 		{
 			window.open(
 					'register.html',
 					'_blank' // <- This is what makes it open in a new window.
 					);
 		}
-
 		else
 		alertify("\'"+cmd+"' is not recognized as an internal or external command, stay tuned, we will update the list of valid commands", false);
 	}
