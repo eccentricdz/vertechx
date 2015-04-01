@@ -242,6 +242,12 @@ $(document).ready(function() {
 $(document).click(function(){
 	$('#command, .response').focus();
 });
+
+$(document).keypress(function(event)
+{
+	if(event.which==13 && Typer.index < Typer.text.length)
+		Typer.index = Typer.text.length;
+});
 	
 $('#console').keypress(function(event) {
 		//console.log(event.target);
