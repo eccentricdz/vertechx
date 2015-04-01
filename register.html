@@ -5,55 +5,65 @@
 <link rel='shortcut icon' type='image/x-icon' href='favicon.ico' />
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script> 
 <script src="register.js"></script>
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+    (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+    m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-37860590-3', 'auto');
+ga('send', 'pageview');
+
+</script>
 </head> 
 <body>
-<img src="logo.png" alt="vertechx 2015" id="logo">
+    <img src="logo.png" alt="vertechx 2015" id="logo">
 
-<audio id="beep">
-  <source src="beep.mp3" type="audio/mpeg">
-</audio>
+    <audio id="beep">
+        <source src="beep.mp3" type="audio/mpeg">
+    </audio>
 
-<h1>Team Registration for VertechX 2015</h1>
-<center><p class="notif"></p></center>
+    <h1>Team Registration for VertechX 2015</h1>
+    <center><p class="notif"></p></center>
 
-<form action="" id="registration" method="post">
-	<input type="text" class='reg' name="teamName" id="team-name" placeholder="What is your team name (5 to 15 characters)?" maxlength=15 required>
-	<br><br>
+    <form action="" id="registration" method="post">
+        <input type="text" class='reg' name="teamName" id="team-name" placeholder="What is your team name (5 to 15 characters)?" maxlength=15 required>
+        <br><br>
 
-	<input type="text" class='reg' name="capName" id="cap-name" placeholder="Enter the name of your captain" required>
-	<input type="text" class='reg' name="capRoll" id="cap-roll-no" placeholder="Enter the roll-no of your captain" required>
-	<input type="email" class='reg' name="capEmail" id="cap-email" placeholder="Enter the email-id of your captain" required>
-	<input type="number" class='reg' name="capPhone" id="cap-phone" placeholder="Enter the phone number of your captain" required>
+        <input type="text" class='reg' name="capName" id="cap-name" placeholder="Enter the name of your captain" required>
+        <input type="text" class='reg' name="capRoll" id="cap-roll-no" placeholder="Enter the roll-no of your captain" required>
+        <input type="email" class='reg' name="capEmail" id="cap-email" placeholder="Enter the email-id of your captain" required>
+        <input type="number" class='reg' name="capPhone" id="cap-phone" placeholder="Enter the phone number of your captain" required>
 
-	<br><br>
-	<input type="text" class='reg' name="name[]" id="name-2" placeholder="Enter the name of the 2nd member" >
-	<input type="text" class='reg' name="roll[]" id="roll-2" placeholder="Enter the roll-no of the 2nd member" >
-	<br><br>
-	<input type="text" class='reg' name="name[]" id="name-3" placeholder="Enter the name of the 3rd member" >
-	<input type="text" class='reg' name="roll[]" id="roll-3" placeholder="Enter the roll-no of the 3rd member" >
-	<br><br>
-	<input type="text" class='reg' name="name[]" id="name-4" placeholder="Enter the name of the 4th member" >
-	<input type="text" class='reg' name="roll[]" id="roll-4" placeholder="Enter the roll-no of the 4th member" >
-	<br><br>
-	<input type="text" class='reg' name="name[]" id="name-5" placeholder="Enter the name of the 5th member" >
-	<input type="text" class='reg' name="roll[]" id="roll-5" placeholder="Enter the roll-no of the 5th member" >
-	<br><br>
-	<input type="text" class='reg' name="name[]" id="name-6" placeholder="Enter the name of the 6th member" >
-	<input type="text" class='reg' name="roll[]" id="roll-6" placeholder="Enter the roll-no of the 6th member" >
-	<br><br>
-	<input type="password" class='reg' id="password" name="pass" placeholder='Enter your password (Minimum six characters)'>
-	<input type="password" class='reg' id="con-password" name="conPass" placeholder='Re-enter your password'>
-	<br><br><br>
-	<input type="submit" id="submit">
-</form>
+        <br><br>
+        <input type="text" class='reg' name="name[]" id="name-2" placeholder="Enter the name of the 2nd member" >
+        <input type="text" class='reg' name="roll[]" id="roll-2" placeholder="Enter the roll-no of the 2nd member" >
+        <br><br>
+        <input type="text" class='reg' name="name[]" id="name-3" placeholder="Enter the name of the 3rd member" >
+        <input type="text" class='reg' name="roll[]" id="roll-3" placeholder="Enter the roll-no of the 3rd member" >
+        <br><br>
+        <input type="text" class='reg' name="name[]" id="name-4" placeholder="Enter the name of the 4th member" >
+        <input type="text" class='reg' name="roll[]" id="roll-4" placeholder="Enter the roll-no of the 4th member" >
+        <br><br>
+        <input type="text" class='reg' name="name[]" id="name-5" placeholder="Enter the name of the 5th member" >
+        <input type="text" class='reg' name="roll[]" id="roll-5" placeholder="Enter the roll-no of the 5th member" >
+        <br><br>
+        <input type="text" class='reg' name="name[]" id="name-6" placeholder="Enter the name of the 6th member" >
+        <input type="text" class='reg' name="roll[]" id="roll-6" placeholder="Enter the roll-no of the 6th member" >
+        <br><br>
+        <input type="password" class='reg' id="password" name="pass" placeholder='Enter your password (Minimum six characters)'>
+        <input type="password" class='reg' id="con-password" name="conPass" placeholder='Re-enter your password'>
+        <br><br><br>
+        <input type="submit" id="submit">
+    </form>
 
 
 
-<footer>
-	<center>
-		<img src="logo-footer.png" alt="vertechx 2015" id="logo-footer">
-	</center>
-</footer>
+        <footer>
+            <center>
+                <img src="logo-footer.png" alt="vertechx 2015" id="logo-footer">
+            </center>
+        </footer>
 
 </body> 
 </html> 
