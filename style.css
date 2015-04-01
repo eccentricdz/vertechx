@@ -132,3 +132,33 @@ body {
 :-ms-input-placeholder {  
    color: 0bc;  
 }
+
+#side{
+	position: fixed;
+	top: 30px;
+	left: 30px;
+}
+
+#logo-side{
+	width: 40px;
+}
+
+#side-links{
+	list-style-type: none;
+  font-family: 'Open Sans', sans-serif;
+  margin: 40px 0;
+  padding: 0;
+  }
+
+  #side-links > li{
+  	padding: 10px 0;
+  }
+
+.side-link{
+	color: #494949;
+	text-transform: uppercase;
+	font-size: 11pt;
+}
+.side-link:hover{
+	color: #0bc
+}
