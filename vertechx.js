@@ -105,6 +105,7 @@ var Typer={
 	addPrompt : function(){
 		var prompt = '<p id="prompt"><span id="a">'+this.name+'</span>:<span id="b">~</span><span id="c">$</span>&nbsp;<input type="text" autofocus id="command" name="command"></input></p>';
 		$('#console').append(prompt);
+		$('#command').focus();
 	}
 }
 $.getJSON('api/login.php', function(data){
@@ -123,36 +124,62 @@ function askUser(ques, name){
 
 
 var excecute = {
-	contact : function(){
+	contact : [
+		function(){
 			for(var i=0;i<contacts.length;i++)
 			{
 				Typer.write('<p class="contacts">'+contacts[i].name+' : '+contacts[i].mobile+' / <a href="mailto:'+contacts[i].email+'">'+contacts[i].email+'</a></p>')
 			}
 	},
-	register : function(){
+	"Get the contact details"
+],
+	register : [function(){
 			window.open(
 					'register.html',
 					'_blank' // <- This is what makes it open in a new window.
 					);
 	},
-	login : function(){
+	"Register your team"
+	],
+	login : [function(){
 		$('#prompt').remove();
 		askUser("Enter your team name : ", 'team');
 
 	},
+	"Login in to your team account"
+	],
 
-	list : function(args){
+	list : [function(args){
 		
 		//if correct sequence args[0]
-        $.post('api/list.php',
-            { ans: args[0] , roll: args[1]},
-            function (data, textStatus, jqXHR) {
-                alertify('Your Submission was recorded, we will announce the prizes by the end of the day', true);
-            }
-        );
+        // $.post('api/list.php',
+        //     { ans: args[0] , roll: args[1]},
+        //     function (data, textStatus, jqXHR) {
+        //         alertify('Your Submission was recorded, we will announce the prizes by the end of the day', true);
+        //     }
+        // );
+		alertify("Submissions for the event 'linked list' are now closed", false);
 		//may be store the no of entries kai, pata chalega kitna successful tha
 		//else part here
-	}
+	},
+	"Submissions for the event 'linked list' are now closed"
+	],
+
+	rules : [function(){
+		window.open('rules.pdf','_blank');
+	},
+	"Get the rules for VertechX 2015"
+	],
+
+	help : [
+	function(){
+		for(var key in excecute)
+		{
+			Typer.write('<p class="help"><span id="c">'+key+'</span> : '+excecute[key][1]+'</p>');
+		}
+	},
+	"Get the list of commands available"
+	]
 }
 
 	
@@ -191,9 +218,10 @@ Typer.file="vertechx.txt";
 
 Typer.text+='If you would like to get in touch with us<!-- slightdelayhere-->, mail us at : <a href="mailto:vertechx.bitmesra@gmail.com">vertechx.bitmesra@gmail.com</a>';
 Typer.text+="<br />or type <span id='a'>'contact'</span> to get the contact details";
-Typer.text+="<br /><br />Type <span id='a'>'register'</span> to register your team now"
-Typer.text+="<br />Type <span id='a'>'login'</span> to log in to your team account"
-Typer.text+="<br /><br />To submit your answer for 'linked list' , type <span id='a'>'list [your-answer] [roll-no]'</span>, for ex., list andpq be/1087/2011"
+Typer.text+="<br /><br />Type <span id='a'>'register'</span> to register your team now";
+Typer.text+="<br />Type <span id='a'>'login'</span> to log in to your team account";
+Typer.text+="<br /><br />Type <span id='a'>'help'</span> to get a list of available commands";
+
 
 Typer.init();
  
@@ -231,25 +259,30 @@ $(document).ready(function() {
 
 
 	function processCommand(cmd){
+		if(cmd=='')
+			return;
+
 		cmd = cmd.split(' ');
 		console.log(cmd);
 		if(excecute.hasOwnProperty(cmd[0]))
 		{
 			if(cmd.length==1)
-				excecute[cmd[0]]();
+				excecute[cmd[0]][0]();
 			else
-				excecute[cmd[0]](cmd.slice(1));
+				excecute[cmd[0]][0](cmd.slice(1));
 		}
 		else
 		alertify("\'"+cmd[0]+"' is not recognized as an internal or external command, stay tuned, we will update the list of valid commands", false);
 	}
 
 $(document).click(function(){
+	if(Typer.index < Typer.text.length)
+                Typer.index = Typer.text.length;
 	$('#command, .response').focus();
 });
 $(document).keypress(function(event)
         {
-            if(event.which==13 && Typer.index < Typer.text.length)
+            if(Typer.index < Typer.text.length)
                 Typer.index = Typer.text.length;
         });
 $('#console').keypress(function(event) {
@@ -258,10 +291,13 @@ $('#console').keypress(function(event) {
 			event.preventDefault();
 			var target = $(event.target);
 			if(target.attr('id')=="command"){
+
 			Typer.write('<p><span id="a">'+Typer.name+'</span>:<span id="b">~</span><span id="c">$</span>&nbsp;'+$('#command').val()+'</p>');
 			var command = $('#command').val();
+			//$('#prompt').remove();
 			processCommand(command);
 			$('#command').val('');
+			
 								}
 			else{
 				var name = target.attr('id');
