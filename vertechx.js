@@ -41,7 +41,7 @@ var contacts = [
 
 var Typer={
 	name : 'vertechx',
-	text: '<span id="a">vertechx</span>:<span id="b">~</span><span id="c">$</span> Vertechx 2015<br/><br/>Welcome to Vertechx 2015<!-- laglaglaglaglaglaglag--><p>The annual technology festival of <a href="http://www.bitmesra.ac.in" target="_blank">Birla Institute of Technology, Mesra</a>, to be held this year on the <span id="a">11th and 12th of April</span><br/></p><p>Brought to you by the technical power houses of our college, <br><span id="a">ACM | SAE | Robolution | IET | IETE | IEEE</p><!-- qowifjqwoeiijefoqwioefjj --><p>Follow us on our <a href="https://www.facebook.com/vertechxbitmesra" target="_blank">facebook</a> page<br/></p><!- oqwipjefqwioefjwioqwji --><p>The rules and event details are coming very soon. Stay tuned for updates.<br/></p>',
+	text: '<span id="a">vertechx</span>:<span id="b">~</span><span id="c">$</span> Vertechx 2015<br/><br/>Welcome to Vertechx 2015<!-- laglaglaglaglaglaglag--><p>The annual technology festival of <a href="http://www.bitmesra.ac.in" target="_blank">Birla Institute of Technology, Mesra</a>, to be held this year on the <span id="a">11th and 12th of April</span><br/></p><p>Brought to you by the technical power houses of our college, <br><span id="a">ACM | SAE | Robolution | IET | IETE | IEEE</p><!-- qowifjqwoeiijefoqwioefjj --><p>Follow us on our <a href="https://www.facebook.com/vertechxbitmesra" target="_blank">facebook</a> page<br/></p><!- oqwipjefqwioefjwioqwji --><p>The event details are coming very soon. Stay tuned for updates.<br/></p>',
 	index:0, 
 	speed:2, 
 	file:"", 
