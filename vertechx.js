@@ -275,6 +275,8 @@ var excecute = {
             var newpwd = getnewpwd(curpwd, cur, arg);
             if(newpwd !== false)
                 pwd = newpwd;
+            else
+                alertify('cd: no such file or directory: '+args[0], false);
         },
         "Change current directory"
     ],
