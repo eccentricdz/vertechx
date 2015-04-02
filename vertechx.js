@@ -124,25 +124,32 @@ function askUser(ques, name){
 
 
 var excecute = {
-	contact : function(){
+	contact : [
+		function(){
 			for(var i=0;i<contacts.length;i++)
 			{
 				Typer.write('<p class="contacts">'+contacts[i].name+' : '+contacts[i].mobile+' / <a href="mailto:'+contacts[i].email+'">'+contacts[i].email+'</a></p>')
 			}
 	},
-	register : function(){
+	"Get the contact details"
+],
+	register : [function(){
 			window.open(
 					'register.html',
 					'_blank' // <- This is what makes it open in a new window.
 					);
 	},
-	login : function(){
+	"Register your team"
+	],
+	login : [function(){
 		$('#prompt').remove();
 		askUser("Enter your team name : ", 'team');
 
 	},
+	"Login in to your team account"
+	],
 
-	list : function(args){
+	list : [function(args){
 		
 		//if correct sequence args[0]
         // $.post('api/list.php',
@@ -155,10 +162,24 @@ var excecute = {
 		//may be store the no of entries kai, pata chalega kitna successful tha
 		//else part here
 	},
+	"Submissions for the event 'linked list' are now closed"
+	],
 
-	rules : function(){
+	rules : [function(){
 		window.open('rules.pdf','_blank');
-	}
+	},
+	"Get the rules for VertechX 2015"
+	],
+
+	help : [
+	function(){
+		for(var key in excecute)
+		{
+			Typer.write('<p class="help"><span id="c">'+key+'</span> : '+excecute[key][1]+'</p>');
+		}
+	},
+	"Get the list of commands available"
+	]
 }
 
 	
@@ -197,8 +218,9 @@ Typer.file="vertechx.txt";
 
 Typer.text+='If you would like to get in touch with us<!-- slightdelayhere-->, mail us at : <a href="mailto:vertechx.bitmesra@gmail.com">vertechx.bitmesra@gmail.com</a>';
 Typer.text+="<br />or type <span id='a'>'contact'</span> to get the contact details";
-Typer.text+="<br /><br />Type <span id='a'>'register'</span> to register your team now"
-Typer.text+="<br />Type <span id='a'>'login'</span> to log in to your team account"
+Typer.text+="<br /><br />Type <span id='a'>'register'</span> to register your team now";
+Typer.text+="<br />Type <span id='a'>'login'</span> to log in to your team account";
+Typer.text+="<br /><br />Type <span id='a'>'help'</span> to get a list of available commands";
 
 
 Typer.init();
@@ -245,9 +267,9 @@ $(document).ready(function() {
 		if(excecute.hasOwnProperty(cmd[0]))
 		{
 			if(cmd.length==1)
-				excecute[cmd[0]]();
+				excecute[cmd[0]][0]();
 			else
-				excecute[cmd[0]](cmd.slice(1));
+				excecute[cmd[0]][0](cmd.slice(1));
 		}
 		else
 		alertify("\'"+cmd[0]+"' is not recognized as an internal or external command, stay tuned, we will update the list of valid commands", false);
