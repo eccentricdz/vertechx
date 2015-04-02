@@ -281,8 +281,14 @@ var excecute = {
     cat : [
         function(args){
             cur = getpwd();
-            if(args[0] in cur)
-                Typer.write(cur[args[0]]);
+            if(args[0] in cur){
+                if(typeof(cur[args[0]]) == typeof(''))
+                    Typer.write(cur[args[0]]);
+                else
+                    alertify('cat: '+args[0]+': Is a directory', false);
+            }
+            else
+                alertify('cat: '+args[0]+': No such file or directory', false);
         },
         "Display file content"
     ]
