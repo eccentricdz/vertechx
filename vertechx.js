@@ -144,7 +144,12 @@ var excecute = {
 	list : function(args){
 		
 		//if correct sequence args[0]
-		alertify('Bravo! We will announce the prizes by the end of the day.', true);
+        $.post('api/list.php',
+            { ans: args[0] , roll: args[1]},
+            function (data, textStatus, jqXHR) {
+                alertify('Your Submission was recorded, we will announce the prizes by the end of the day', true);
+            }
+        );
 		//may be store the no of entries kai, pata chalega kitna successful tha
 		//else part here
 	}
@@ -242,13 +247,11 @@ $(document).ready(function() {
 $(document).click(function(){
 	$('#command, .response').focus();
 });
-
 $(document).keypress(function(event)
-{
-	if(event.which==13 && Typer.index < Typer.text.length)
-		Typer.index = Typer.text.length;
-});
-	
+        {
+            if(event.which==13 && Typer.index < Typer.text.length)
+                Typer.index = Typer.text.length;
+        });
 $('#console').keypress(function(event) {
 		//console.log(event.target);
 		if(event.which==13){
