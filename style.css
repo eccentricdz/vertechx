@@ -162,3 +162,7 @@ body {
 .side-link:hover{
 	color: #0bc
 }
+.dir {
+    font-weight: bold;
+    color: #7D7478;
+}
