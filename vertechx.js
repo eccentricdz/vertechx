@@ -1,3 +1,5 @@
+var cmdHistory = [];
+var cmdHistoryIndex = 0;
 
 var pwd = [];
 var fs = {};
@@ -367,9 +369,10 @@ $(document).ready(function() {
 	function processCommand(cmd){
 		if(cmd=='')
 			return;
-
+		cmdHistory.unshift(cmd);
+		cmdHistoryIndex = 0;
 		cmd = cmd.split(' ');
-		console.log(cmd);
+		//console.log(cmd);
 		if(excecute.hasOwnProperty(cmd[0]))
 		{
 			if(cmd.length==1)
@@ -393,9 +396,10 @@ $(document).keypress(function(event)
         });
 $('#console').keypress(function(event) {
 		//console.log(event.target);
+		var target = $(event.target);
 		if(event.which==13){
 			event.preventDefault();
-			var target = $(event.target);
+			
 			if(target.attr('id')=="command"){
 
 			Typer.write('<p><span id="a">'+Typer.name+'</span>:<span id="b">~'+pwdtostr()+'</span><span id="c">$</span>&nbsp;'+$('#command').val()+'</p>');
@@ -433,6 +437,31 @@ $('#console').keypress(function(event) {
                 }
             }
         }
+        
+});
+
+$('#console').keydown(function(event){
+	var target = $(event.target);
+	var command = $('#command');
+		if(event.which==38){
+			event.preventDefault();
+			if(target.attr('id')!='command')
+				return;
+				if(cmdHistoryIndex==cmdHistory.length)
+					return;
+				command.val(cmdHistory[cmdHistoryIndex++]);
+		}
+		else if(event.which==40){
+			event.preventDefault();
+			if(target.attr('id')!='command')
+				return;
+				if(cmdHistoryIndex<2){
+					command.val('');
+					cmdHistoryIndex = 0;
+					return;
+				}
+				command.val(cmdHistory[(--cmdHistoryIndex)-1]);
+		}
 });
 
 });
