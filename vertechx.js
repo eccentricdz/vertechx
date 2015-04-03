@@ -294,9 +294,11 @@ $('#console').keypress(function(event) {
 
 			Typer.write('<p><span id="a">'+Typer.name+'</span>:<span id="b">~</span><span id="c">$</span>&nbsp;'+$('#command').val()+'</p>');
 			var command = $('#command').val();
-			//$('#prompt').remove();
+			$('#prompt').remove();
 			processCommand(command);
-			$('#command').val('');
+			//$('#command').val('');
+			if(command!='login')
+				Typer.addPrompt();
 			
 								}
 			else{
