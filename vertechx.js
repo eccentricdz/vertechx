@@ -13,6 +13,8 @@ function amort(fs, par, path){
     if(typeof(fs) == typeof(""))
         return;
     tmp = '';
+    if(!par)
+        par = fs;
     if(!path)
         path = '';
     else
@@ -49,16 +51,20 @@ function getnewpwd(pwd, cur, args){
     console.log(ret);
     return ret;
 }
+var helpmsg = '';
+helpmsg+='If you would like to get in touch with us<!-- slightdelayhere-->, mail us at : <a href="mailto:vertechx.bitmesra@gmail.com">vertechx.bitmesra@gmail.com</a>';
+helpmsg+="<br />or type <span id='a'>'contact'</span> to get the contact details";
+helpmsg+="<br /><br />Type <span id='a'>'register'</span> to register your team now";
+helpmsg+="<br />Type <span id='a'>'login'</span> to log in to your team account";
+helpmsg+="<br /><br />Type <span id='a'>'help'</span> to get a list of available commands";
+helpmsg+="<br /><br />Event details are organized as directories and files";
+helpmsg+="<br />Type <span id='a'>'ls'</span> to list the content of current directory<br /><span id='a'>'cd &lt;dir_name&gt;'</span> to change the directory to &lt;dir_name&gt;<br /><span id='a'>'cat &lt;file_name&gt;'</span> to view the content of &lt;file_name&gt;";
 $.getJSON('api/fs.php',
     function (data, textStatus, jqXHR) {
         // success callback
         fs = data;
         fs['vertechx.txt'] = 'Welcome to Vertechx 2015<!-- laglaglaglaglaglaglag--><p>The annual technology festival of <a href="http://www.bitmesra.ac.in" target="_blank">Birla Institute of Technology, Mesra</a>, to be held this year on the <span id="a">11th and 12th of April</span><br/></p><p>Brought to you by the technical power houses of our college, <br><span id="a">ACM | SAE | Robolution | IET | IETE | IEEE</p><!-- qowifjqwoeiijefoqwioefjj --><p>Follow us on our <a href="https://www.facebook.com/vertechxbitmesra" target="_blank">facebook</a> page<br/></p><!- oqwipjefqwioefjwioqwji --><p>The event details are coming very soon. Stay tuned for updates.<br/></p>';
-        fs['vertechx.txt']+='If you would like to get in touch with us<!-- slightdelayhere-->, mail us at : <a href="mailto:vertechx.bitmesra@gmail.com">vertechx.bitmesra@gmail.com</a>';
-        fs['vertechx.txt']+="<br />or type <span id='a'>'contact'</span> to get the contact details";
-        fs['vertechx.txt']+="<br /><br />Type <span id='a'>'register'</span> to register your team now";
-        fs['vertechx.txt']+="<br />Type <span id='a'>'login'</span> to log in to your team account";
-        fs['vertechx.txt']+="<br /><br />Type <span id='a'>'help'</span> to get a list of available commands";
+        fs['vertechx.txt'] += helpmsg;
         amort(fs);
     }
 );
@@ -249,16 +255,17 @@ var excecute = {
             for(var i = 0;i<pwd.length;i++){
                 cur = cur[pwd[i]];
             }
-            Typer.write("<span class='dir'>.</span>");
+            Typer.write("<span class='ls-hint'>(Hint: click on the elements to save typing)</span><br/>");
+            Typer.write("<a href='#' class='dir'>.</a>");
             Typer.write('<br />');
-            Typer.write("<span class='dir'>..</span>");
+            Typer.write("<a href='#' class='dir'>..</a>");
             Typer.write('<br />');
             for(var key in cur){
                 if(key == '.' || key == '..' || key == 'meta')continue;
                 if(typeof(cur[key]) == typeof(""))
-                    Typer.write("<span class='file'>"+key+"</span>");
+                    Typer.write("<a href='#' class='file'>"+key+"</a>");
                 else
-                    Typer.write("<span class='dir'>"+key+"/</span>");
+                    Typer.write("<a href='#' class='dir'>"+key+"/</a>");
                 Typer.write('<br />');
             }
         },
@@ -330,12 +337,7 @@ function authenticate(team, password, cb){
 Typer.speed=8;
 Typer.file="vertechx.txt";
 
-Typer.text+='If you would like to get in touch with us<!-- slightdelayhere-->, mail us at : <a href="mailto:vertechx.bitmesra@gmail.com">vertechx.bitmesra@gmail.com</a>';
-Typer.text+="<br />or type <span id='a'>'contact'</span> to get the contact details";
-Typer.text+="<br /><br />Type <span id='a'>'register'</span> to register your team now";
-Typer.text+="<br />Type <span id='a'>'login'</span> to log in to your team account";
-Typer.text+="<br /><br />Type <span id='a'>'help'</span> to get a list of available commands";
-
+Typer.text+=helpmsg;
 
 Typer.init();
  
@@ -393,6 +395,26 @@ $(document).click(function(){
 	if(Typer.index < Typer.text.length)
                 Typer.index = Typer.text.length;
 	$('#command, .response').focus();
+});
+$(document).on('click','.dir', function(e){
+    $txt = $(e.target).text();
+    $('#command').attr('value', 'cd '+$txt);
+    var e = $.Event("keypress");
+    e.which = 13;
+    $('#command').trigger(e);
+    $('#command').attr('value', 'ls');
+    var e = $.Event("keypress");
+    e.which = 13;
+    $('#command').trigger(e);
+    return false;
+});
+$(document).on('click','.file', function(e){
+    $txt = $(e.target).text();
+    $('#command').attr('value', 'cat '+$txt);
+    var e = $.Event("keypress");
+    e.which = 13;
+    $('#command').trigger(e);
+    return false;
 });
 $(document).keypress(function(event)
         {
