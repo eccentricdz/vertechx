@@ -287,7 +287,12 @@ var excecute = {
                 Typer.write(cur[args[0]]);
         },
         "Display file content"
-    ]
+    ],
+
+    'up/down' : ['', 'Navigate command history'],
+    clr : [function(){
+    	$('#console').html('');
+    },"Clear console"]
 }
 
 	
