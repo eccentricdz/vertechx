@@ -171,7 +171,7 @@ body {
 
 @media only screen 
   and (min-width: 320px) 
-  and (max-width: 480px)
+  and (max-width: 640px)
 {
 	#side{
 		position: relative;
