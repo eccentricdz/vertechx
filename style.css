@@ -5,7 +5,7 @@ body {
 	#console {
 		font-family: courier, monospace;
 		color: #fff;
-		width:750px;
+		width:63%;
 		margin-left:auto;
 		margin-right:auto;
 		margin-top:100px;
@@ -137,6 +137,7 @@ body {
 	position: fixed;
 	top: 30px;
 	left: 30px;
+	width: 12%;
 }
 
 #logo-side{
@@ -151,7 +152,8 @@ body {
   }
 
   #side-links > li{
-  	padding: 10px 0;
+  	padding: 5px 0;
+  	border-bottom: 1px solid #252525;
   }
 
 .side-link{
@@ -165,4 +167,31 @@ body {
 .dir {
     font-weight: bold;
     color: #7D7478;
+}
+
+@media only screen 
+  and (min-width: 320px) 
+  and (max-width: 480px)
+{
+	#side{
+		position: relative;
+		margin-top: 20px;
+		width:63%;
+		margin-left:auto;
+		margin-right:auto;
+		top: 0;
+		left: 0;
+		}
+
+		#logo-side{
+			display: none;
+		}
+
+		#side-links{
+			text-align : center;
+		}
+
+		#console{
+			margin-top: 50px;
+		}
 }
