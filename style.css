@@ -168,6 +168,11 @@ body {
     font-weight: bold;
     color: #7D7478;
 }
+.ls-hint {
+    font-style: italic;
+    font-size: 85%;
+    color: #7D7478;
+}
 
 @media handheld, screen and (max-width: 700px)
 {
