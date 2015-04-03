@@ -1,5 +1,67 @@
 
-
+var pwd = [];
+var fs = {};
+function pwdtostr(){
+    var ret = '';
+    for(var i = 0;i<pwd.length;i++){
+        ret += '/'+pwd[i];
+    }
+    console.log(ret);
+    return ret;
+}
+function amort(fs, par, path){
+    if(typeof(fs) == typeof(""))
+        return;
+    tmp = '';
+    if(!path)
+        path = '';
+    else
+        tmp = '/';
+    for(key in fs){
+        amort(fs[key], fs, path+tmp+key);
+    }
+    fs['meta'] = {};
+    fs['meta']['path'] = path;
+    fs['.'] = fs;
+    fs['..'] = par;
+}
+function getpwd(){
+    var ret = fs;
+    for(var i = 0;i<pwd.length;i++){
+        ret = ret[pwd[i]];
+    }
+    return ret;
+}
+function getnewpwd(pwd, cur, args){
+    var ret = pwd;
+    for(var i = 0;i<args.length;i++){
+        if(args[i] == "")
+            continue;
+        if(args[i] in cur){
+            cur = cur[args[i]];
+            ret.push(args[i]);
+        }
+        else
+            return false;
+    }
+    ret = cur['meta']['path'].split('/');
+    if(ret.length == 1 && ret[0] == "")ret = [];
+    console.log(ret);
+    return ret;
+}
+$.getJSON('api/fs.php',
+    function (data, textStatus, jqXHR) {
+        // success callback
+        fs = data;
+        fs['vertechx.txt'] = 'Welcome to Vertechx 2015<!-- laglaglaglaglaglaglag--><p>The annual technology festival of <a href="http://www.bitmesra.ac.in" target="_blank">Birla Institute of Technology, Mesra</a>, to be held this year on the <span id="a">11th and 12th of April</span><br/></p><p>Brought to you by the technical power houses of our college, <br><span id="a">ACM | SAE | Robolution | IET | IETE | IEEE</p><!-- qowifjqwoeiijefoqwioefjj --><p>Follow us on our <a href="https://www.facebook.com/vertechxbitmesra" target="_blank">facebook</a> page<br/></p><!- oqwipjefqwioefjwioqwji --><p>The event details are coming very soon. Stay tuned for updates.<br/></p>';
+        fs['vertechx.txt']+='If you would like to get in touch with us<!-- slightdelayhere-->, mail us at : <a href="mailto:vertechx.bitmesra@gmail.com">vertechx.bitmesra@gmail.com</a>';
+        fs['vertechx.txt']+="<br />or type <span id='a'>'contact'</span> to get the contact details";
+        fs['vertechx.txt']+="<br /><br />Type <span id='a'>'register'</span> to register your team now";
+        fs['vertechx.txt']+="<br />Type <span id='a'>'login'</span> to log in to your team account";
+        fs['vertechx.txt']+="<br /><br />Type <span id='a'>'help'</span> to get a list of available commands";
+        amort(fs);
+    }
+);
 var contacts = [
 {
 	name : 'Jay Megotia',
@@ -103,7 +165,7 @@ var Typer={
 	},
 
 	addPrompt : function(){
-		var prompt = '<p id="prompt"><span id="a">'+this.name+'</span>:<span id="b">~</span><span id="c">$</span>&nbsp;<input type="text" autofocus id="command" name="command"></input></p>';
+		var prompt = '<p id="prompt"><span id="a">'+this.name+'</span>:<span id="b">~'+pwdtostr()+'</span><span id="c">$</span>&nbsp;<input type="text" autofocus id="command" name="command"></input></p>';
 		$('#console').append(prompt);
 		$('#command').focus();
 	}
@@ -179,7 +241,51 @@ var excecute = {
 		}
 	},
 	"Get the list of commands available"
-	]
+	],
+
+    ls : [
+        function(args){
+            var cur = fs;
+            for(var i = 0;i<pwd.length;i++){
+                cur = cur[pwd[i]];
+            }
+            Typer.write("<span class='dir'>.</span>");
+            Typer.write('<br />');
+            Typer.write("<span class='dir'>..</span>");
+            Typer.write('<br />');
+            for(var key in cur){
+                if(key == '.' || key == '..' || key == 'meta')continue;
+                if(typeof(cur[key]) == typeof(""))
+                    Typer.write("<span class='file'>"+key+"</span>");
+                else
+                    Typer.write("<span class='dir'>"+key+"/</span>");
+                Typer.write('<br />');
+            }
+        },
+        "Show current directory content"
+    ],
+    cd : [
+        function(args){
+            var cur = fs, curpwd = [];
+            if(args[0] != '/'){
+                cur = getpwd();
+                curpwd = pwd;
+            }
+            arg = args[0].split('/');
+            var newpwd = getnewpwd(curpwd, cur, arg);
+            if(newpwd !== false)
+                pwd = newpwd;
+        },
+        "Change current directory"
+    ],
+    cat : [
+        function(args){
+            cur = getpwd();
+            if(args[0] in cur)
+                Typer.write(cur[args[0]]);
+        },
+        "Display file content"
+    ]
 }
 
 	
@@ -292,13 +398,15 @@ $('#console').keypress(function(event) {
 			var target = $(event.target);
 			if(target.attr('id')=="command"){
 
-			Typer.write('<p><span id="a">'+Typer.name+'</span>:<span id="b">~</span><span id="c">$</span>&nbsp;'+$('#command').val()+'</p>');
+			Typer.write('<p><span id="a">'+Typer.name+'</span>:<span id="b">~'+pwdtostr()+'</span><span id="c">$</span>&nbsp;'+$('#command').val()+'</p>');
 			var command = $('#command').val();
 			$('#prompt').remove();
 			processCommand(command);
-			//$('#command').val('');
-			if(command!='login')
-				Typer.addPrompt();
+
+            if(command != 'login')
+                Typer.addPrompt();
+			// $('#command').val('');
+
 			
 								}
 			else{
