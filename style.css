@@ -169,9 +169,7 @@ body {
     color: #7D7478;
 }
 
-@media only screen 
-  and (min-width: 320px) 
-  and (max-width: 640px)
+@media handheld, screen and (max-width: 700px)
 {
 	#side{
 		position: relative;
