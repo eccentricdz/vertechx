@@ -66,7 +66,7 @@ $.getJSON('api/fs.php',
     function (data, textStatus, jqXHR) {
         // success callback
         fs = data;
-        fs['vertechx.txt'] = 'Welcome to Vertechx 2015<!-- laglaglaglaglaglaglag--><p>The annual technology festival of <a href="http://www.bitmesra.ac.in" target="_blank">Birla Institute of Technology, Mesra</a>, to be held this year on the <span id="a">11th and 12th of April</span><br/></p><p>Brought to you by the technical power houses of our college, <br><span id="a">ACM | SAE | Robolution | IET | IETE | IEEE</p><!-- qowifjqwoeiijefoqwioefjj --><p>Follow us on our <a href="https://www.facebook.com/vertechxbitmesra" target="_blank">facebook</a> page<br/></p><!- oqwipjefqwioefjwioqwji --><p>The event details are coming very soon. Stay tuned for updates.<br/></p>';
+        fs['vertechx.txt'] = 'Welcome to Vertechx 2015<!-- laglaglaglaglaglaglag--><p>The annual technology festival of <a href="http://www.bitmesra.ac.in" target="_blank">Birla Institute of Technology, Mesra</a>, to be held this year on the <span id="a">11th and 12th of April</span><br/></p><p>Brought to you by the technical power houses of our college, <br><span id="a">ACM | SAE | Robolution | IET | IETE | IEEE</p><!-- qowifjqwoeiijefoqwioefjj --><p>Follow us on our <a href="https://www.facebook.com/vertechxbitmesra" target="_blank">facebook</a> page<br/></p><!- oqwipjefqwioefjwioqwji -->';
         fs['vertechx.txt'] += helpmsg;
         amort(fs);
     }
