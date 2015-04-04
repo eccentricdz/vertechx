@@ -3,6 +3,7 @@ var cmdHistoryIndex = 0;
 
 var pwd = [];
 var fs = {};
+var cdhint = "<span class='ls-hint'>(Hint: You can use <span id='a'>ls</span> to get the content of the current directory)</span>"
 function pwdtostr(){
     var ret = '';
     for(var i = 0;i<pwd.length;i++){
@@ -60,7 +61,7 @@ helpmsg+="<br /><br />Type <span id='a'>'register'</span> to register your team 
 helpmsg+="<br />Type <span id='a'>'login'</span> to log in to your team account";
 helpmsg+="<br /><br />Type <span id='a'>'help'</span> to get a list of available commands";
 helpmsg+="<br /><br />Event details are organized as directories and files";
-helpmsg+="<br />Type <span id='a'>'ls'</span> to list the content of current directory<br /><span id='a'>'cd &lt;dir_name&gt;'</span> to change the directory to &lt;dir_name&gt;<br /><span id='a'>'cat &lt;file_name&gt;'</span> to view the content of &lt;file_name&gt;";
+helpmsg+="<br />Type <span id='a'>'ls'</span> to list the content of current directory<br />Type <span id='a'>'cd &lt;dir_name&gt;'</span> to change the directory to &lt;dir_name&gt;<br />Type <span id='a'>'cd ..'</span> to jump to the parent directory<br />Type <span id='a'>'cat &lt;file_name&gt;'</span> to view the content of &lt;file_name&gt;";
 $.getJSON('api/fs.php',
     function (data, textStatus, jqXHR) {
         // success callback
@@ -219,21 +220,21 @@ var excecute = {
 	"Login in to your team account"
 	],
 
-	list : [function(args){
-		
-		//if correct sequence args[0]
-        // $.post('api/list.php',
-        //     { ans: args[0] , roll: args[1]},
-        //     function (data, textStatus, jqXHR) {
-        //         alertify('Your Submission was recorded, we will announce the prizes by the end of the day', true);
-        //     }
-        // );
-		alertify("Submissions for the event 'linked list' are now closed", false);
-		//may be store the no of entries kai, pata chalega kitna successful tha
-		//else part here
-	},
-	"Submissions for the event 'linked list' are now closed"
-	],
+	// list : [function(args){
+	// 	
+	// 	//if correct sequence args[0]
+    //     // $.post('api/list.php',
+    //     //     { ans: args[0] , roll: args[1]},
+    //     //     function (data, textStatus, jqXHR) {
+    //     //         alertify('Your Submission was recorded, we will announce the prizes by the end of the day', true);
+    //     //     }
+    //     // );
+	// 	alertify("Submissions for the event 'linked list' are now closed", false);
+	// 	//may be store the no of entries kai, pata chalega kitna successful tha
+	// 	//else part here
+	// },
+	// "Submissions for the event 'linked list' are now closed"
+	// ],
 
 	rules : [function(){
 		window.open('rules.pdf','_blank');
@@ -245,7 +246,7 @@ var excecute = {
 	function(){
 		for(var key in excecute)
 		{
-			Typer.write('<p class="help"><span id="c">'+key+'</span> : '+excecute[key][1]+'</p>');
+			Typer.write('<p class="help"><span id="c">'+key+(excecute[key][2]?(' '+excecute[key][2]):'')+'</span> : '+excecute[key][1]+'</p>');
 		}
 	},
 	"Get the list of commands available"
@@ -282,12 +283,18 @@ var excecute = {
             }
             arg = args[0].split('/');
             var newpwd = getnewpwd(curpwd, cur, arg);
-            if(newpwd !== false)
+            if(newpwd !== false){
                 pwd = newpwd;
+                if(cdhint != ""){
+                    Typer.write(cdhint);
+                    cdhint = "";
+                }
+            }
             else
                 alertify('cd: no such file or directory: '+args[0], false);
         },
-        "Change current directory"
+        "Change current directory to &lt;dir_name&gt;, goes to parent directory if &lt;dir_name&gt; is <span id='a'>..</span>",
+        "&lt;dir_name&gt;"
     ],
     cat : [
         function(args){
@@ -301,7 +308,8 @@ var excecute = {
             else
                 alertify('cat: '+args[0]+': No such file or directory', false);
         },
-        "Display file content"
+        "Display content of &lt;file_name&gt;",
+        "&lt;file_name&gt;"
     ],
 
     'up/down' : ['', 'Navigate command history'],
