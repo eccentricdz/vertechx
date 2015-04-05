@@ -54,12 +54,15 @@ body {
   padding: 10px 75px;
   width: 200px;
   display: block;
-  margin: 0 auto;
+  margin: 40px auto;
   cursor: pointer;
 	}
 
 	#submit:hover{
 		color: #fc5130;		border-color: #fc5130;
+	}
+	.notif{
+		color: #fc5130;
 	}
     .notif.error {
         color: red;
@@ -198,3 +201,85 @@ body {
 			margin-top: 50px;
 		}
 }
+
+#trump-selection{
+	margin-top: 40px;
+}
+
+
+input[type=checkbox] {
+	visibility: hidden;
+}
+
+.trump-option {
+	width: 50px;
+	height: 10px;
+	background: #333;
+	margin: 20px auto;
+
+	-webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
+	border-radius: 50px;
+	position: relative;
+	left: -110px;
+	-webkit-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,0.2);
+	-moz-box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,0.2);
+	box-shadow: inset 0px 1px 1px rgba(0,0,0,0.5), 0px 1px 0px rgba(255,255,255,0.2);
+}
+
+.trump-option label.knob {
+	display: block;
+	width: 16px;
+	height: 16px;
+
+	-webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
+	border-radius: 50px;
+
+	-webkit-transition: left .4s ease;
+	-moz-transition: left .4s ease;
+	-o-transition: left .4s ease;
+	-ms-transition: left .4s ease;
+	transition: left .4s ease;
+	cursor: pointer;
+	position: absolute;
+	top: -3px;
+	left: -3px;
+
+	-webkit-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
+	-moz-box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
+	box-shadow: 0px 2px 5px 0px rgba(0,0,0,0.3);
+	background: #fcfff4;
+
+	background: -webkit-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: -moz-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: -o-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: -ms-linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	background: linear-gradient(top, #fcfff4 0%, #dfe5d7 40%, #b3bead 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#fcfff4', endColorstr='#b3bead',GradientType=0 );
+}
+
+.trump-name{
+	color: white;
+  position: absolute;
+  width: 400px;
+  top: -3px;
+  left: 89px;
+  cursor: pointer;
+}
+
+.trump-name:hover{
+	color: #fc5130;
+}
+
+
+.trump-option input[type=checkbox]:checked + label.knob {
+	left: 37px;
+	background: #FC5130;
+}
+
+.trump-option input[type=checkbox]:checked ~ label.trump-name {
+	color: #0bc;
+}
+
+
