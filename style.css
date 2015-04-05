@@ -282,4 +282,30 @@ input[type=checkbox] {
 	color: #0bc;
 }
 
+footer{
+	position: relative;
+}
+#footer-links{
+  list-style-type: none;
+  overflow: hidden;
+  margin-bottom: 20px;
+  margin-top: 0;
+  padding: 0px;
+  width: 155px;
+}
+
+#footer-links > li{
+	float: left;
+	padding: 5px 26px;
+}
+
+.footer-link{
+		font-size: 18pt;
+		color: #494949;
+}
+
+.footer-link:hover{
+	color : #0bc;
+}
+
 
