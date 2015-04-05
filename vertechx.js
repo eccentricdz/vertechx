@@ -307,7 +307,17 @@ var excecute = {
     'up/down' : ['', 'Navigate command history'],
     clr : [function(){
     	$('#console').html('');
-    },"Clear console"]
+    },"Clear console"],
+    trump : [
+    function(){
+    	// if team registered
+    	//     	window.open(
+					// 'trump.html',
+					// '_blank' // <- This is what makes it open in a new window.
+					// );
+    	//     	else 
+    	alertify("You need to login first!", false);
+    },"Select your trump events"]
 }
 
 	
@@ -460,7 +470,7 @@ $('#console').keypress(function(event) {
 				{
                     authenticate(userResponse['team'], userResponse['password'], {
                         success: function(){
-                            alertify("Welcome Team "+userResponse['team']+'!', true);
+                            alertify("Welcome Team "+userResponse['team']+'! Type "trump" to select your trump events', true);
                             Typer.name = userResponse['team'];
                             Typer.addPrompt();
                         },
