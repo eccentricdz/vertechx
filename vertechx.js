@@ -518,4 +518,12 @@ $('#console').keydown(function(event){
 		}
 });
 
+var sponsorIndex = 0;
+var sponsorCount = $('#sponsors > li').length;
+
+var sponsorSlide = setInterval(function(){
+		$('#sponsors').css('margin-left', -1*sponsorIndex*100+'%');
+		sponsorIndex = (sponsorIndex+1)%sponsorCount;
+	}, 2000);
+
 });
